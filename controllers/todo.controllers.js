@@ -39,7 +39,7 @@ const getAllTodos = async(req,res) => {
 
 const updateTodos = async(req,res) => {
     try{
-        const {id} = req.params.id;
+        const {id} = req.params;
         console.log("REQ PARAMS ID : ",req.params.id)
         const {title,completed} = req.body;
         console.log(req.body);
@@ -59,7 +59,7 @@ const updateTodos = async(req,res) => {
             return res.status(404).json({message: "Internal server error"});
         }
 
-        res.status(201).json(updatedTodo);
+        res.status(200).json(updatedTodo);
 
         
 
@@ -71,15 +71,18 @@ const updateTodos = async(req,res) => {
 
 const deleteTodos = async(req,res) => {
     try{
-        const {id} = req.params.id;
+        const {id} = req.params;
         console.log("req params id", req.params.id)
 
-        const {title,completed} = req.body;
+        // const {title,completed} = req.body;
 
         const deleteTodo = await Todo.findByIdAndDelete(id)
+
+        res.status(200).json({message: "Todo deleted"})
     }
     catch(error){
         console.log("failed to delete todos", error)
+        res.status(500).json({message: 'Failed to delete todos'})
     }
 }
 

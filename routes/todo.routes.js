@@ -7,6 +7,8 @@ router.route("/").get(getAllTodos)
 
 router.route("/").post(addTodos)
 
-router.route("/:id").put(updateTodos).delete(deleteTodos)
+router.route("/:id").put(updateTodos)
+
+router.route("/:id").delete(deleteTodos)
 
 export default router;
